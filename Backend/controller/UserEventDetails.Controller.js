@@ -1,13 +1,17 @@
 import { validationResult } from 'express-validator';
+import dotenv from 'dotenv';
 import nodemailer from 'nodemailer';
 import { UserEventDetailsModel } from '../model/UserEventDetails.Model.js';
+
+// for using dotenv file
+dotenv.config();
 
 // Create a Nodemailer transporter
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'thegreatayurveda@gmail.com', // Your email address
-        pass: 'mscy bdjt dttl plbj', // Your email password
+        user: process.env.SEND_EMAIL, // Your email address
+        pass: process.env.SEND_EMAIL_PASSWORD, // Your email password
     },
 });
 
@@ -36,7 +40,7 @@ export const RegistrationForEvent = async (req, res, next) => {
         const mailOptions = {
             from: 'thegreatayurveda@gmail.com',
             to: email,
-            subject: `Registration Successful for ${title}`,
+            subject: `Registration Successful for ${title} event`,
             text: `
 Dear ${username},
 We are delighted to inform you that your registration for the event "${title}" has been successfully completed.
@@ -48,6 +52,7 @@ We are delighted to inform you that your registration for the event "${title}" h
  - **Location:** ${location}
 
 Thank you for registering. We look forward to seeing you at the event
+
 Best regards,
 Event Managment Team`,
         };
