@@ -123,9 +123,7 @@ export const deleteEvent = async (req, res, next) => {
         text: `
 Dear ${user.username},
 
-We regret to inform you that the "${
-          eventDetails.title
-        }" event, originally scheduled for:
+We regret to inform you that the "${eventDetails.title}" event, originally scheduled for:
 
   - **Date:** ${new Date(eventDetails.date).toDateString()}
   - **Time:** ${eventDetails.time}
